@@ -42,11 +42,7 @@ public class MyDBHandlerClass extends SQLiteOpenHelper {
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         //if date as inserted incorrectly it will return -1
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return result != -1;
     }
     /**
      * Returns all the data from database

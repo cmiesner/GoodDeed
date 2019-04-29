@@ -1,70 +1,58 @@
     package com.example.gooddeed;
 
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.Menu;
+import android.support.v4.app.Fragment;
 
     public class MainActivity extends AppCompatActivity {
 
         private static final String TAG = "MainActivity";
-
-        MyDBHandlerClass mDatabaseHelper;
-        private Button btnAdd, btnViewData;
-        private EditText editText;
+        Fragment fragment1;
+        Fragment fragment2;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-            editText = (EditText) findViewById(R.id.editText);
-            btnAdd = (Button) findViewById(R.id.btnAdd);
-            btnViewData = (Button) findViewById(R.id.btnView);
-            mDatabaseHelper = new MyDBHandlerClass(this);
 
-            btnAdd.setOnClickListener(new View.OnClickListener() {
+            fragment1 = new Fragment();
+            fragment2 = new Fragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.container,fragment1).commit();
+
+
+            TabLayout tabs = findViewById(R.id.tabs);
+            tabs.addTab(tabs.newTab().setText("Recent Deeds"));
+            tabs.addTab(tabs.newTab().setText("New Deed"));
+            tabs.setOnTabSelectedListener((new TabLayout.OnTabSelectedListener() {
                 @Override
-                public void onClick(View v) {
-                    String newEntry = editText.getText().toString();
-                    if (editText.length() != 0) {
-                        AddData(newEntry);
-                        editText.setText("");
-                    } else {
-                        toastMessage("You must put something in the text field!");
+                public void onTabSelected(TabLayout.Tab tab) {
+                    int position = tab.getPosition();
+                    Fragment selected = null;
+                    if(position == 0) {
+                        selected = fragment1;
                     }
-
+                    else if(position == 1) {
+                        selected = fragment2;
+                    }
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
                 }
-            });
 
-            btnViewData.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, list_layout.class);
-                    startActivity(intent);
+                public void onTabUnselected(TabLayout.Tab tab) {
+
                 }
-            });
 
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            }));
         }
-
-        public void AddData(String newEntry) {
-            boolean insertData = mDatabaseHelper.addData(newEntry);
-
-            if (insertData) {
-                toastMessage("Data Successfully Inserted!");
-            } else {
-                toastMessage("Something went wrong");
-            }
-        }
-
-        /**
-         * customizable toast
-         * @param message
-         */
-        private void toastMessage(String message){
-            Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+            return true;
         }
     }

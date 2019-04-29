@@ -25,9 +25,9 @@ public class edit_layout_data extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_layout_data);
-        btnSave = (Button) findViewById(R.id.btnSave);
-        btnDelete = (Button) findViewById(R.id.btnDelete);
-        editable_item = (EditText) findViewById(R.id.editable_item);
+        btnSave = findViewById(R.id.btnSave);
+        btnDelete = findViewById(R.id.btnDelete);
+        editable_item = findViewById(R.id.editable_item);
         mDatabaseHelper = new MyDBHandlerClass(this);
 
         //get the intent extra from the ListDataActivity
