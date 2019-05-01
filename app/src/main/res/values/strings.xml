@@ -13,7 +13,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="information_string">The purpose of this application is for people to participate in more good deeds.
+        As we know, we aren\'t rewarded for some of the nicest things we do for other people and not everyone has infinite
+        money to give. That\'s why this application is your reward. Our goal is that this will be a trusted app to show
+        employers something they can\'t learn about you in the 30 minute interviews.
+        </string>
+    <string name="noSearch">The search menu has not been implemented yet.</string>
+    <string name="information_title">Good Deed Application Information</string>
+    <string name="thank_you">Thank you for taking time out of your day to reward someone who took time out of theirs to help you!</string>
 </resources>
